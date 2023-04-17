@@ -1,32 +1,14 @@
 ---
 layout: default
-section: blog
-title: "Yang Chen: Blog"
+section: Whisper
+title: "Yang Chen"
 ---
 
 <h1> Blog </h1>
 
-<p>
-[<a href="rss.xml">RSS feed</a>]
-</p>
+<script
+	type="module"
+	src="https://gradio.s3-us-west-2.amazonaws.com/3.24.1/gradio.js"
+></script>
 
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{site.baseurl}}{{post.url}}">{{ post.title }}</a>
-      <small>{{ post.date | date: "%h %d, %Y" }}</small> 
-    </li>
-  {% endfor %}
-</ul>
-
-<p>
-I will post random things about my research, Linux, networking, hobby coding, etc. 
-I have something called "the grad writing phobia", and this is my desperate
-struggle to overcome it. Prepare a pinch of salt if you must read.
-</p>
-
-<p>
-Sorry for the broken English. Writing in a second language is damn hard, you
-know.
-</p>
-
+<gradio-app src="https://ychennlp-just4fun.hf.space"></gradio-app>
