@@ -5,6 +5,20 @@ title: "Yang Chen"
 ---
 
 <style>
+  /* ... (your existing styles) */
+  #toggleButton {
+    background-color: #123c40;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+</style>
+
+<style>
   @media screen and (max-width: 700px) {
       .paper {
           display: flex;
@@ -57,13 +71,13 @@ title: "Yang Chen"
     <h1>Yang Chen</h1>
     <p>
       <i>Ph.D. Student</i><br /> 
-      <a href="https://ic.gatech.edu/" target="_blank">School of Interactive Computing</a><br />
       <a href="https://ic.gatech.edu/" target="_blank">Georgia Institute of Technology</a><br />
       [Email]: yangc[at]gatech.edu<br />
       [<a href="https://scholar.google.com/citations?user=o-oBMWEAAAAJ&hl=en" target="_blank">Google Scholar</a>]
       [<a href="https://twitter.com/ychenNLP" target="_blank">Twitter</a>]
-      [<a href="https://www.linkedin.com/in/yang-chen-853336180/" target="_blank">LinkedIn</a>]
-      
+      [<a href="https://drive.google.com/file/d/17wRWA4Nspj_RcVaLLZCae_n7pdHlNoKv/view?usp=sharing" target="_blank">CV</a>]
+      [<a href="https://www.linkedin.com/in/yang-chen-853336180/" target="_blank">LinkedIn</a>]<br />
+      <p style="color: rgb(51, 38, 150);">Searching for full-time industry lab positions starting in 2024 Summer!</p>
     </p>
   </div>
 </div>
@@ -74,13 +88,14 @@ title: "Yang Chen"
   
   <br>
   <br>
-  <p>I am interested in multimodal and multilingual language model:</p>
+  <p>Main work on multimodal and multilingual language model:</p>
 <ul>
-    <li>Eliciting pre-trained visual knowledge in multimodal foundation models (<a href="https://open-vision-language.github.io/infoseek/" target="_blank">InfoSeek</a>, <a href="https://open-vision-language.github.io/oven/" target="_blank">OVEN</a>)</li>
-    <li>Improving language models to better understand low-resource languages (<a href="https://arxiv.org/abs/2211.15613" target="_blank">EasyProject</a>, <a href="https://arxiv.org/abs/2305.13582" target="_blank">TransFusion</a>, <a href="https://arxiv.org/abs/2010.06127" target="_blank">LMS</a>)</li>
-    <li>Aligning language models to protect <a href="https://arxiv.org/abs/2310.02224" target="_blank">privacy</a> and detect <a href="https://arxiv.org/abs/2212.09683" target="_blank">misinformation</a>.</li>
+    <li>Benchmarking factual knowledge w/ multimodal LLMs + retrieval (<a href="https://open-vision-language.github.io/infoseek/" target="_blank">InfoSeek</a>, <a href="https://open-vision-language.github.io/oven/" target="_blank">OVEN</a>)</li>
+    <li>Aligning and redteaming multimodal LLMs to protect user <a href="https://arxiv.org/abs/2310.02224" target="_blank">privacy</a> </li>
+    <li>Improving low-resource languages understanding (<a href="https://arxiv.org/abs/2211.15613" target="_blank">EasyProject</a>, <a href="https://arxiv.org/abs/2305.13582" target="_blank">TransFusion</a>, <a href="https://arxiv.org/abs/2010.06127" target="_blank">Learn-to-select</a>, <a href="https://arxiv.org/abs/2004.14519v4" target="_blank">GigaBERT</a>)</li>
+    
 </ul>
-I interned at Google Brain (now <a href="https://www.deepmind.com/research" target="_blank">Google Deepmind</a>) working on multimodal LLMs with <a href="https://www.hexianghu.com/" target="_blank">Hexiang Hu</a> and <a href="https://mingweichang.org/" target="_blank">Ming-Wei Chang</a>.
+Previously interned at <a href="https://www.deepmind.com/research" target="_blank">Google Deepmind</a> working on multimodal LLMs/retrieval with <a href="https://www.hexianghu.com/" target="_blank">Hexiang Hu</a> and <a href="https://mingweichang.org/" target="_blank">Ming-Wei Chang</a>.
 
 </p>
 
@@ -177,65 +192,78 @@ I interned at Google Brain (now <a href="https://www.deepmind.com/research" targ
     EMNLP 2021, <a href="https://arxiv.org/abs/2010.06127" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>, <a href="https://github.com/edchengg/model_selection" style="color: #000000" target="_blank">[<u>Code</u>]</a>
 </div>
 </ul>
-<ul>
-<li class="paper">
-	<img src="imgs/gigabert.png" alt="Paper 1 Image" width="220" height="100" style="float: left; margin-right: 15px;">
-	<div>
-    <span class="title">
-      <b>GigaBERT: Zero-shot Transfer Learning from English to Arabic</b><br>
-    </span>
-    <a href="https://scholar.google.com/citations?user=rpOgHRMAAAAJ&hl=en" target="_blank">Wuwei Lan</a>, Yang Chen, <a href="https://cocoxu.github.io/" target="_blank">Wei Xu</a>, <a href="http://aritter.github.io/index.html" target="_blank">Alan Ritter</a><br>
-    EMNLP 2020, <a href="https://arxiv.org/abs/2004.14519v4" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>, <a href="https://github.com/edchengg/GigaBERT" style="color: #000000" target="_blank">[<u>Code</u>]</a>
-</div>
-</ul>
 
-<ul>
-<li class="paper">
-	<img src="imgs/selftrain.png" alt="Paper 1 Image" width="220" height="100" style="float: left; margin-right: 15px;">
-	<div>
-    <span class="title">
-      <b>Semi-supervised ASR by End-to-end Self-training</b><br>
-    </span>
-    Yang Chen, <a href="https://sites.google.com/ttic.edu/weiranwang/home" target="_blank">Weiran Wang</a>, Chao Wang<br>
-    Interspeech 2020, <a href="https://arxiv.org/abs/2001.09128" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>
-</div>
-</ul>
+<button id="toggleButton">Show More Papers</button>
+<div id="hiddenPapers" style="display:none;"><li class="paper">
+  <ul>
+    <li class="paper">
+      <img src="imgs/gigabert.png" alt="Paper 1 Image" width="220" height="100" style="float: left; margin-right: 15px;">
+      <div>
+        <span class="title">
+          <b>GigaBERT: Zero-shot Transfer Learning from English to Arabic</b><br>
+        </span>
+        <a href="https://scholar.google.com/citations?user=rpOgHRMAAAAJ&hl=en" target="_blank">Wuwei Lan</a>, Yang Chen, <a href="https://cocoxu.github.io/" target="_blank">Wei Xu</a>, <a href="http://aritter.github.io/index.html" target="_blank">Alan Ritter</a><br>
+        EMNLP 2020, <a href="https://arxiv.org/abs/2004.14519v4" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>, <a href="https://github.com/edchengg/GigaBERT" style="color: #000000" target="_blank">[<u>Code</u>]</a>
+    </div>
+    </li>
+    <li class="paper">
+  <img alt="Paper 1 Image" height="100" src="imgs/selftrain.png" style="float: left; margin-right: 15px;" width="220"/>
+  <div>
+  <span class="title">
+  <b>Semi-supervised ASR by End-to-end Self-training</b><br/>
+  </span>
+      Yang Chen, <a href="https://sites.google.com/ttic.edu/weiranwang/home" target="_blank">Weiran Wang</a>, Chao Wang<br/>
+      Interspeech 2020, <a href="https://arxiv.org/abs/2001.09128" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>
+  </div>
+  </li>
+  <li class="paper">
+  <img alt="Paper 1 Image" height="80" src="imgs/enteval.png" style="float: left; margin-right: 15px;" width="220"/>
+  <div>
+  <span class="title">
+  <b>EntEval: A Holistic Evaluation Benchmark for Entity Representations</b><br/>
+  </span>
+  <a href="https://ttic.uchicago.edu/~mchen/" target="_blank">Mingda Chen*</a>, <a href="https://zeweichu.github.io/" target="_blank">Zewei Chu*</a>, Yang Chen, <a href="http://karlstratos.com/" target="_blank">Karl Stratos</a>, <a href="https://ttic.uchicago.edu/~kgimpel/index.html" target="_blank">Kevin Gimpel</a><br/>
+      EMNLP 2019, <a href="https://arxiv.org/abs/1909.00137" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>
+  </div>
+</li>
 
-<ul>
-<li class="paper">
-	<img src="imgs/enteval.png" alt="Paper 1 Image" width="220" height="80" style="float: left; margin-right: 15px;">
-	<div>
-    <span class="title">
-      <b>EntEval: A Holistic Evaluation Benchmark for Entity Representations</b><br>
-    </span>
-    <a href="https://ttic.uchicago.edu/~mchen/" target="_blank">Mingda Chen*</a>, <a href="https://zeweichu.github.io/" target="_blank">Zewei Chu*</a>, Yang Chen, <a href="http://karlstratos.com/" target="_blank">Karl Stratos</a>, <a href="https://ttic.uchicago.edu/~kgimpel/index.html" target="_blank">Kevin Gimpel</a><br>
-    EMNLP 2019, <a href="https://arxiv.org/abs/1909.00137" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>
-</div>
+  </li><li class="paper">
+  <img alt="Paper 1 Image" height="80" src="imgs/postmodifier.png" style="float: left; margin-right: 15px;" width="220"/>
+  <div>
+  <span class="title">
+  <b>PoMo: Generating Entity-Specific Post-Modifiers in Context</b><br/>
+  </span>
+  <a href="https://www3.cs.stonybrook.edu/~junkang/" target="_blank">Jun Seok Kang</a>, <a href="https://rloganiv.github.io/" target="_blank">Robert L. Logan IV</a>, <a href="https://zeweichu.github.io/" target="_blank">Zewei Chu</a>, Yang Chen, <a href="https://ddua.github.io/src/index.html" target="_blank">Dheeru Dua</a>, <a href="https://ttic.uchicago.edu/~kgimpel/index.html" target="_blank">Kevin Gimpel</a>, <a href="http://sameersingh.org/" target="_blank">Sameer Singh</a>, <a href="https://www3.cs.stonybrook.edu/~niranjan/" target="_blank">Niranjan Balasubramanian</a><br/>
+      NAACL-HLT 2019, <a href="https://stonybrooknlp.github.io/PoMo/" style="color: #000000" target="_blank">[<u>Project Page</u>]</a> <a href="https://arxiv.org/abs/1904.03111" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>
+  </div>
+  </li>
 </ul>
-<ul>
-<li class="paper">
-	<img src="imgs/postmodifier.png" alt="Paper 1 Image" width="220" height="80" style="float: left; margin-right: 15px;">
-	<div>
-    <span class="title">
-      <b>PoMo: Generating Entity-Specific Post-Modifiers in Context</b><br>
-    </span>
-    <a href="https://www3.cs.stonybrook.edu/~junkang/" target="_blank">Jun Seok Kang</a>, <a href="https://rloganiv.github.io/" target="_blank">Robert L. Logan IV</a>, <a href="https://zeweichu.github.io/" target="_blank">Zewei Chu</a>, Yang Chen, <a href="https://ddua.github.io/src/index.html" target="_blank">Dheeru Dua</a>, <a href="https://ttic.uchicago.edu/~kgimpel/index.html" target="_blank">Kevin Gimpel</a>, <a href="http://sameersingh.org/" target="_blank">Sameer Singh</a>, <a href="https://www3.cs.stonybrook.edu/~niranjan/" target="_blank">Niranjan Balasubramanian</a><br>
-    NAACL-HLT 2019, <a href="https://stonybrooknlp.github.io/PoMo/" style="color: #000000" target="_blank">[<u>Project Page</u>]</a> <a href="https://arxiv.org/abs/1904.03111" style="color: #000000" target="_blank">[<u>arXiv</u>]</a>
 </div>
-</ul>
+  <script>
+  document.getElementById("toggleButton").addEventListener("click", function() {
+      var hiddenDiv = document.getElementById("hiddenPapers");
+      if (hiddenDiv.style.display === "none") {
+          hiddenDiv.style.display = "block";
+          this.innerHTML = "Show Fewer Papers";
+      } else {
+          hiddenDiv.style.display = "none";
+          this.innerHTML = "Show More Papers";
+      }
+  });
+  </script>
 
 
 <hr>
 <h2> Work Experience </h2> 
 <ul>
 <li class="paper">
-	<img src="imgs/google.png" alt="Paper 1 Image" width="220" height="50" style="float: left; margin-right: 15px;">
+	<img src="imgs/gdm-logo.svg" alt="Paper 1 Image" width="220" height="50" style="float: left; margin-right: 15px;">
 	<div>
     <span class="title">
-      Fall 2022, Spring 2023: Student Researcher, <a href="https://www.deepmind.com/" target="_blank">Google Brain</a> @ Seattle, WA<br>
+      Fall 2022, Spring 2023: Research Intern, <a href="https://www.deepmind.com/" target="_blank">Google Deepmind</a> @ Seattle, WA<br>
     </span>
     Mentor: <a href="https://www.hexianghu.com/" target="_blank">Hexiang Hu</a> and <a href="https://mingweichang.org/" target="_blank">Ming-Wei Chang</a>  <br>
-    Vision + Language
+    Multimodal LLMs and Retrieval model
 </div>
 <ur>
 <li class="paper">
@@ -245,7 +273,7 @@ I interned at Google Brain (now <a href="https://www.deepmind.com/research" targ
       Summer 2019: Applied Scientist Intern, <a href="https://developer.amazon.com/zh/alexa/science" target="_blank">Amazon Alexa</a> @ Boston, MA<br>
     </span>
     Mentor: <a href="https://sites.google.com/ttic.edu/weiranwang/home" target="_blank">Weiran Wang</a> and Chao Wang <br>
-    Speech <br>
+    Self-improving speech recognition model <br>
 </div>
 </ul>
 
