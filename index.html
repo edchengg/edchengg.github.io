@@ -19,18 +19,32 @@ title: "Yang Chen"
 </style>
 
 <style>
+  /* For large screens */
+  .paper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+  .paper img {
+      width: 20%; /* Adjust as needed */
+      height: auto;
+  }
+  .paper div {
+      width: 75%; /* Adjust as needed */
+  }
+
+  /* For screens smaller than or equal to 700px */
   @media screen and (max-width: 700px) {
       .paper {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
+          flex-direction: column;
+          align-items: left;
       }
       .paper img {
-          width: 40%; /* Adjust as needed */
-          height: 40%;
+          width: 50%;
       }
       .paper div {
-          width: 55%; /* Adjust as needed */
+          width: 100%;
+          text-align: left; /* Optional: center align the text */
       }
   }
 </style>
