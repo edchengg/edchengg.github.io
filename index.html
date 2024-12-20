@@ -86,11 +86,26 @@
                 </a>
             </div>
         </div>
-        
+        <div class="project-card bg-[#a3b18a] p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://arxiv.org/abs/2412.15084'">
+          <div>
+            <p class="font-medium text-gray-800 text-sm mb-1">Announcements</p>
+            <p class="font-medium text-gray-800 text-2xl mb-1 hover:text-gray-600 transition-colors">AceMath: Advancing Frontier Math Reasoning with Post-Training and Reward Modeling</p>
+            <p class="text-sm text-black">Resources: 
+              <!-- <a href="#" class="underline hover:text-gray-600 transition-colors">models</a>, 
+              <a href="#" class="underline hover:text-gray-600 transition-colors">datasets</a>,  -->
+              <a href="https://arxiv.org/abs/2412.15084" class="underline hover:text-gray-600 transition-colors">[paper]</a>
+            </p>
+            <p class="text-xs text-balck-400 mt-2">Dec 19th, 2024</p>
+          </div>
+        </div>
+
+        <div class="mb-12"></div>
         <div>
-          <h3 class="text-sm font-medium mb-2 text-gray-700">Recent Research</h3>
+          <h3 class="text-sm font-medium mb-2 text-gray-700">Recent Work</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start"> <!-- Added 'items-start' here -->
-            <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="togglePapers('multimodal')">
+            <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer relative" onclick="togglePapers('multimodal')">
+              <span class="absolute top-2 text-xs text-gray-500">Research · 2022 - 2024</span>
+              <div class="mb-4"></div>
               <p class="font-medium text-gray-800 text-lg">Multimodal LLM</p>
               <p class="text-sm text-gray-500 mt-1">Building AI that understand visual world</p>
               <ul id="multimodal-papers" class="hidden mt-4 paper-list text-sm text-gray-600">
@@ -98,8 +113,11 @@
                 <li>Emergent Visual Privacy Concern [<a href="https://arxiv.org/abs/2407.04952" target="_blank">EMNLP'24</a> (Oral)]</li>
                 <li>Universal Multimodal Retriever [<a href="https://arxiv.org/abs/2311.17136" target="_blank">ECCV'24</a> (Oral)]</li>
               </ul>
+              <!-- <p class="text-xs text-gray-500 mt-4">2022 - 2024</p> -->
             </div>
-            <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="togglePapers('multilingual')">
+            <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer relative" onclick="togglePapers('multilingual')">
+              <span class="absolute top-2 text-xs text-gray-500">Research · 2019 - 2024</span>
+              <div class="mb-4"></div>
               <p class="font-medium text-gray-800 text-lg">Multilingual LLM</p>
               <p class="text-sm text-gray-500 mt-1">Bridging representation across global languages</p>
               <ul id="multilingual-papers" class="hidden mt-4 paper-list text-sm text-gray-600">
@@ -107,6 +125,7 @@
                 <li>Label Projection (<a href="https://arxiv.org/abs/2211.15613" target="_blank">ACL'23 Findings</a>, <a href="https://arxiv.org/abs/2402.03131" target="_blank">ICLR'24</a>)</li>
                 <li>English-Arabic BERT (<a href="https://arxiv.org/abs/2004.14519v4" target="_blank">EMNLP'20</a>)</li>
               </ul>
+              
             </div>
           </div>
         </div>
