@@ -86,6 +86,38 @@
                 </a>
             </div>
         </div>
+        
+        <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B'">
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="md:w-2/3 flex flex-col justify-between">
+              <div>
+                <p class="font-medium text-gray-800 text-sm mb-1">Announcements</p>
+                <p class="font-medium text-gray-800 text-2xl mb-1 hover:text-gray-600 transition-colors line-clamp-2">AceMath-RL-Nemotron-7B: Scalable RL training receipe</p>
+                <p class="text-sm text-gray-600 mb-3">TLDR: A math reasoning model trained entirely through RL, starting from the Deepseek-R1-Distilled-Qwen-7B.</p>
+                <ul class="text-sm text-gray-600 mb-3 list-disc pl-5">
+                  <li>AIME 2024: 69.0% Pass@1 (+13.5%)</li>
+                  <li>AIME 2025: 53.6% Pass@1 (+14.4%)</li>
+                  <li>LiveCodeBench: 44.4% Pass@1 (+6.8%)</li>
+                </ul>
+                <p class="text-sm text-gray-600 mb-3">We share our training recipe, training logs, and data curation details in the blog.</p>
+                <div class="flex flex-col gap-2">
+                  <a href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit">
+                    <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo">
+                    Use Model
+                  </a>
+                  <a href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit">📝 Read Full Blog</a>
+                </div>
+              </div>
+              <p class="text-xs text-gray-400 mt-2">April 22, 2025</p>
+            </div>
+            <div class="md:w-4/6">
+              <img src="static/acemath-rl.png" alt="AceMath Overview" class="w-full h-auto object-contain rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6"></div>
+        
         <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://research.nvidia.com/labs/adlr/acemath/'">
           <div>
             <p class="font-medium text-gray-800 text-sm mb-1">Announcements</p>
@@ -101,16 +133,16 @@
                 <a href="https://research.nvidia.com/labs/adlr/acemath/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition ml-2">Project Page</a>
               </span>
             </p>
-            <div class="mb-4"></div>
+            <!-- <div class="mb-4"></div>
             <img src="static/acemath-pic.png" alt="AceMath Overview" class="w-full rounded-lg">
-            <div class="mb-4"></div>
+            <div class="mb-4"></div> -->
             <p class="text-xs text-balck-400 mt-2">Dec 19th, 2024</p>
           </div>
         </div>
 
         <div class="mb-12"></div>
         <div>
-          <h3 class="text-sm font-medium mb-2 text-gray-700">Recent Work</h3>
+          <h3 class="text-sm font-medium mb-2 text-gray-700">Past Work</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start"> <!-- Added 'items-start' here -->
             <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer relative" onclick="togglePapers('multimodal')">
               <span class="absolute top-2 text-xs text-gray-500">Research · 2022 - 2024</span>
