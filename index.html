@@ -71,7 +71,7 @@
             <p class="text-sm text-gray-500">I am an AI Research Scientist @ NVIDIA (ADLR Group) building Large Language Models. I received my Ph.D. from Georgia Tech in August 2024. 
              <br>
              <br>
-              My current research interests lie in AI reasoning and alignment.</p>
+              My current research interests lie in AI reasoning and scaling reinforcement learning for LLM reasoning.</p>
         </div>
         
         <div class="mb-6">
@@ -87,6 +87,38 @@
             </div>
         </div>
         
+        <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://arxiv.org/abs/2505.16400'">
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="md:w-2/3 flex flex-col justify-between">
+              <div>
+                <p class="font-medium text-gray-800 text-sm mb-1">Announcements</p>
+                <p class="font-medium text-gray-800 text-2xl mb-1 hover:text-gray-600 transition-colors line-clamp-2">AceReason: Math and Code Reasoning through
+                  RL</p>
+                <p class="text-sm text-gray-600 mb-3">TLDR: A math and code reasoning model trained entirely through RL. We found math-RL improves code reasoning and use it as a warm-up for code-RL to improve training stability and efficiency.</p>
+                <ul class="text-xs text-gray-600 mb-3 list-disc pl-5">
+                  <li>AIME 2024: 78.6% (+8.9%)</li>
+                  <li>AIME 2025: 67.4% (+17.2%)</li>
+                  <li>LiveCodeBench v5: 61.1% (+8.1%)</li>
+                  <li>Codeforce: 2024 ELO (+543)</li>
+                </ul>
+                <div class="flex flex-col gap-2">
+                  <a href="https://huggingface.co/nvidia/AceReason-Nemotron-14B" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
+                    <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo">
+                    Use Model
+                  </a>
+                  <a href="https://arxiv.org/abs/2505.16400" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit" onclick="event.stopPropagation()">📝 Read Technical Report</a>
+                </div>
+              </div>
+              <p class="text-xs text-black-400 mt-2">May 21, 2025</p>
+            </div>
+            <div class="md:w-4/6 pt-6">
+              <img src="static/acereason.png" alt="AceReason Overview" class="w-full h-auto object-contain rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6"></div>
+        
         <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://research.nvidia.com/labs/adlr/acemath_rl/'">
           <div class="flex flex-col md:flex-row gap-4">
             <div class="md:w-2/3 flex flex-col justify-between">
@@ -94,23 +126,23 @@
                 <p class="font-medium text-gray-800 text-sm mb-1">Announcements</p>
                 <p class="font-medium text-gray-800 text-2xl mb-1 hover:text-gray-600 transition-colors line-clamp-2">AceMath-RL: Training Math Reasoning Model with RL</p>
                 <p class="text-sm text-gray-600 mb-3">TLDR: A math reasoning model trained entirely through RL, starting from the Deepseek-R1-Distilled-Qwen-7B.</p>
-                <ul class="text-sm text-gray-600 mb-3 list-disc pl-5">
-                  <li>AIME 2024: 69.0% Pass@1 (+13.5%)</li>
-                  <li>AIME 2025: 53.6% Pass@1 (+14.4%)</li>
-                  <li>LiveCodeBench: 44.4% Pass@1 (+6.8%)</li>
+                <ul class="text-xs text-gray-600 mb-3 list-disc pl-5">
+                  <li>AIME 2024: 69.0% (+13.5%)</li>
+                  <li>AIME 2025: 53.6% (+14.4%)</li>
+                  <li>LiveCodeBench v5: 44.4% (+6.8%)</li>
                 </ul>
                 <p class="text-sm text-gray-600 mb-3">We share our training recipe, training logs, and data curation details in the blog.</p>
                 <div class="flex flex-col gap-2">
-                  <a href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit">
+                  <a href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
                     <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo">
                     Use Model
                   </a>
-                  <a href="https://research.nvidia.com/labs/adlr/acemath_rl/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit">📝 Read Full Blog</a>
+                  <a href="https://research.nvidia.com/labs/adlr/acemath_rl/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit" onclick="event.stopPropagation()">📝 Read Full Blog</a>
                 </div>
               </div>
               <p class="text-xs text-black-400 mt-2">April 22, 2025</p>
             </div>
-            <div class="md:w-4/6">
+            <div class="md:w-4/6 pt-6">
               <img src="static/acemath-rl.png" alt="AceMath Overview" class="w-full h-auto object-contain rounded-lg">
             </div>
           </div>
@@ -125,17 +157,14 @@
             <div class="mb-4"></div>
             <p class="text-sm text-black">
               <span class="inline-flex">
-                <a href="https://huggingface.co/collections/nvidia/acemath-678917d12f09885479d549fe" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center">
+                <a href="https://huggingface.co/collections/nvidia/acemath-678917d12f09885479d549fe" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center" onclick="event.stopPropagation()">
                   <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo">
                   Hugginface (Models & Datasets)
                 </a>
-                <a href="https://arxiv.org/abs/2412.15084" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition ml-2">Technical Report</a>
-                <a href="https://research.nvidia.com/labs/adlr/acemath/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition ml-2">Project Page</a>
+                <a href="https://arxiv.org/abs/2412.15084" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition ml-2" onclick="event.stopPropagation()">Technical Report</a>
+                <a href="https://research.nvidia.com/labs/adlr/acemath/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition ml-2" onclick="event.stopPropagation()">Project Page</a>
               </span>
             </p>
-            <!-- <div class="mb-4"></div>
-            <img src="static/acemath-pic.png" alt="AceMath Overview" class="w-full rounded-lg">
-            <div class="mb-4"></div> -->
             <p class="text-xs text-balck-400 mt-2">Dec 19th, 2024</p>
           </div>
         </div>
