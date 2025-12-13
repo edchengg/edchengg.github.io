@@ -1,234 +1,401 @@
 <!DOCTYPE html>
-<html lang="en">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yang Chen</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-      body {
-          background-color: #faf9f6;
-          font-family: 'Poppins', sans-serif;
-          color: #333333;
-      }
-      .project-card {
-          transition: all 0.3s ease;
-      }
-      .project-card:hover {
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .paper-list {
-          list-style-type: disc;
-          padding-left: 1rem;
-      }
-      .paper-list li {
-          margin-bottom: 0.5rem;
-      }
-      .paper-list a {
-        text-decoration: underline;
-        color: #e67e22;
-    }
-    .paper-list a:hover {
-        color: #d35400;
-    }
-  </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37166920-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'UA-37166920-1');
-  </script>
-   <!-- Google Analytics -->
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Optional: Google Analytics (load ONCE, configure multiple IDs if needed) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KCXSPDD83"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-0KCXSPDD83');
+    gtag('config', 'G-0KCXSPDD83');      // GA4
+    gtag('config', 'UA-37166920-1');     // UA (legacy) — remove if not needed
   </script>
+
+  <style>
+    :root{
+      --bg: #faf9f6;
+      --card: #ffffff;
+      --border: #eef2f7;
+      --text: #111827;
+      --muted: #6b7280;
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --paperLink: #e67e22;
+      --paperLinkHover: #d35400;
+    }
+
+    body{
+      background: var(--bg);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    p, li { line-height: 1.75; }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .soft-shadow{ box-shadow: 0 1px 0 rgba(0,0,0,.02); }
+
+    .project-card{
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .project-card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(0,0,0,.08);
+      box-shadow: var(--shadow);
+    }
+
+    .chip{
+      background: rgba(17,24,39,.04);
+      border: 1px solid rgba(17,24,39,.06);
+      border-radius: 9999px;
+      padding: .45rem .85rem;
+      font-size: .875rem;
+      color: rgba(17,24,39,.78);
+      transition: background .15s ease, transform .15s ease;
+      text-decoration: none;
+    }
+    .chip:hover{
+      background: rgba(17,24,39,.06);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    /* Paper list styling like your original */
+    .paper-list a{
+      text-decoration: underline;
+      color: var(--paperLink);
+    }
+    .paper-list a:hover{
+      color: var(--paperLinkHover);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-card, .chip { transition: none; }
+      .project-card:hover{ transform: none; }
+    }
+  </style>
 </head>
-</head>
-<body class="p-6">
-    <div class="max-w-3xl mx-auto">
-        <div class="flex justify-between items-center mb-4">
-            <p class="text-sm text-gray-600">Research Scientist @ NVIDIA</p>
+
+<body class="p-5 sm:p-8">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:border focus:border-gray-200 focus:rounded-lg focus:px-4 focus:py-2">
+    Skip to content
+  </a>
+
+  <div class="max-w-3xl mx-auto">
+    <header class="mb-6">
+      <div class="flex items-center justify-between gap-4">
+        <p class="text-sm text-gray-500">Research Scientist @ NVIDIA</p>
+
+        <nav class="hidden sm:flex items-center gap-4 text-sm text-gray-600">
+          <a href="#about" class="hover:text-gray-900 hover:no-underline">About</a>
+          <a href="#projects" class="hover:text-gray-900 hover:no-underline">Projects</a>
+          <a href="#past" class="hover:text-gray-900 hover:no-underline">Past Work</a>
+          <a href="#contact" class="hover:text-gray-900 hover:no-underline">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="mb-6">
+        <div class="flex items-center gap-4">
+          <div class="w-20 h-20 shrink-0 relative">
+            <img
+              src="static/yang.png"
+              alt="Yang Chen"
+              class="w-full h-full object-cover rounded-2xl border border-gray-100"
+              loading="lazy"
+            />
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Yang Chen</h1>
+          </div>
         </div>
-        
-        <div class="flex items-center mb-6">
-            <div class="w-20 h-20 mr-4 relative">
-                <img src="static/yang.png" alt="Yang Chen" class="w-full h-full object-cover rounded-lg">
-                <div class="absolute inset-0 rounded-lg shadow-inner"></div>
-            </div>
-            <h1 class="text-3xl font-semibold text-gray-800">
-                Yang Chen
-            </h1>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="card soft-shadow p-6 mb-6">
+        <p class="text-[15px] sm:text-base text-gray-600">
+          I am a Research Scientist @ NVIDIA (ADLR Group). I received my Ph.D. from Georgia Tech in August 2024.
+          <br /><br />
+          I currently work on scaling reinforcement learning for reasoning LLMs.
+        </p>
+      </section>
+
+      <!-- Links -->
+      <section id="contact" class="mb-8">
+        <div class="flex flex-wrap gap-2">
+          <a class="chip" href="https://scholar.google.com/citations?user=o-oBMWEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+            Google Scholar
+          </a>
+          <a class="chip" href="https://drive.google.com/file/d/17wRWA4Nspj_RcVaLLZCae_n7pdHlNoKv/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+            CV
+          </a>
+          <a class="chip inline-flex items-center gap-2" href="https://twitter.com/ychenNLP" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            X
+          </a>
         </div>
-        
-        <div class="bg-white rounded-lg shadow-sm p-6 mb-6 border border-gray-100">
-            <!-- <h2 class="text-lg mb-4 text-gray-700">About Me</h2> -->
-            <p class="text-sm text-gray-500">I am a Research Scientist @ NVIDIA (ADLR Group). I received my Ph.D. from Georgia Tech in August 2024. 
-             <br>
-             <br>
-              My current research interests lie in scaling reinforcement learning for reasoning LLMs.</p>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="mb-10">
+        <div class="flex items-baseline justify-between gap-4 mb-4">
+          <h2 class="text-lg font-medium text-gray-900">Selected Projects</h2>
+          <p class="text-sm text-gray-500 hidden sm:block">Recent work</p>
         </div>
-        
-        <div class="mb-6">
-          <!-- <h3 class="text-sm font-medium mb-2 text-gray-700">Connect with me</h3> -->
-            <div class="flex space-x-2">
-                <a href="https://scholar.google.com/citations?user=o-oBMWEAAAAJ&hl=en" target="_blank" class="px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition">Google Scholar</a>
-                <a href="https://drive.google.com/file/d/17wRWA4Nspj_RcVaLLZCae_n7pdHlNoKv/view?usp=sharing" target="_blank" class="px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition">CV</a>
-                <a href="https://twitter.com/ychenNLP" target="_blank" class="px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition flex items-center">
-                    <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-        
-        <div class="space-y-4 mb-10">
-  
-          <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://arxiv.org/abs/2506.13284'">
-            <div class="flex flex-col sm:flex-row justify-between gap-4">
-              <div class="flex-1">
+
+        <div class="space-y-4">
+          <!-- Project 1 -->
+          <article class="project-card card p-4 sm:p-5">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
-                  <p class="font-semibold text-gray-800 text-lg hover:text-gray-600 transition-colors">AceReason-Nemotron 1.1</p>
-                  <!-- <span class="text-xs tracking-wide text-gray-500">Research</span> -->
+                  <a href="https://arxiv.org/abs/2506.13284" target="_blank" rel="noopener noreferrer"
+                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
+                    AceReason-Nemotron 1.1
+                  </a>
                   <span class="text-xs text-gray-400">June 2025</span>
                 </div>
-                <p class="text-sm text-gray-600 mt-2">Building on prior work, I contributed to research combining large-scale supervised fine-tuning with RL. We released the SOTA 7B model -- AceReason-Nemotron-1.1-7B.</p>
+
+                <p class="text-[15px] text-gray-600 mt-2">
+                  Building on prior work, I contributed to research combining large-scale supervised fine-tuning with RL.
+                  We released the SOTA 7B model — AceReason-Nemotron-1.1-7B.
+                </p>
+
                 <div class="flex flex-wrap gap-2 mt-3">
-                  <a href="https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
-                    <!-- <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo"> -->
+                  <a class="chip" href="https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" target="_blank" rel="noopener noreferrer">
                     Models
                   </a>
-                  <a href="https://huggingface.co/datasets/nvidia/AceReason-1.1-SFT" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
-                    <!-- <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo"> -->
+                  <a class="chip" href="https://huggingface.co/datasets/nvidia/AceReason-1.1-SFT" target="_blank" rel="noopener noreferrer">
                     Training Data
                   </a>
-                  <a href="https://arxiv.org/abs/2506.13284" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit" onclick="event.stopPropagation()">Technical Report</a>
+                  <a class="chip" href="https://arxiv.org/abs/2506.13284" target="_blank" rel="noopener noreferrer">
+                    Technical Report
+                  </a>
                 </div>
               </div>
-              <div class="sm:w-28 sm:h-20 shrink-0">
-                <img src="static/acereason1.1.png" alt="AceReason 1.1 overview" class="w-full h-full object-cover rounded-md">
+
+              <div class="sm:w-32 sm:h-24 shrink-0">
+                <img
+                  src="static/acereason1.1.png"
+                  alt="AceReason 1.1 overview"
+                  class="w-full h-full object-cover rounded-xl border border-gray-100"
+                  loading="lazy"
+                />
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://arxiv.org/abs/2505.16400'">
-            <div class="flex flex-col sm:flex-row justify-between gap-4">
-              <div class="flex-1">
+          <!-- Project 2 -->
+          <article class="project-card card p-4 sm:p-5">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
-                  <p class="font-semibold text-gray-800 text-lg hover:text-gray-600 transition-colors">AceReason-Nemotron</p>
-                  <!-- <span class="text-xs tracking-wide text-gray-500">Research</span> -->
+                  <a href="https://arxiv.org/abs/2505.16400" target="_blank" rel="noopener noreferrer"
+                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
+                    AceReason-Nemotron
+                  </a>
                   <span class="text-xs text-gray-400">May 2025</span>
                 </div>
-                <p class="text-sm text-gray-600 mt-2">I co-led the effort to scale the previous work to both math and code domains. We released the SOTA medium size model -- AceReason-Nemotron-14B.</p>
+
+                <p class="text-[15px] text-gray-600 mt-2">
+                  I co-led the effort to scale the previous work to both math and code domains.
+                  We released the SOTA medium-size model — AceReason-Nemotron-14B.
+                </p>
+
                 <div class="flex flex-wrap gap-2 mt-3">
-                  <a href="https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
-                    <!-- <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo"> -->
+                  <a class="chip" href="https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" target="_blank" rel="noopener noreferrer">
                     Models
                   </a>
-                  <a href="https://huggingface.co/datasets/nvidia/AceReason-Math" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
-                    <!-- <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo"> -->
+                  <a class="chip" href="https://huggingface.co/datasets/nvidia/AceReason-Math" target="_blank" rel="noopener noreferrer">
                     Training Data
                   </a>
-                  <a href="https://arxiv.org/abs/2505.16400" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit" onclick="event.stopPropagation()">NeurIPS'25</a>
+                  <a class="chip" href="https://arxiv.org/abs/2505.16400" target="_blank" rel="noopener noreferrer">
+                    NeurIPS'25
+                  </a>
                 </div>
               </div>
-              <div class="sm:w-28 sm:h-20 shrink-0">
-                <img src="static/acereason.png" alt="AceReason overview" class="w-full h-full object-cover rounded-md">
+
+              <div class="sm:w-32 sm:h-24 shrink-0">
+                <img
+                  src="static/acereason.png"
+                  alt="AceReason overview"
+                  class="w-full h-full object-cover rounded-xl border border-gray-100"
+                  loading="lazy"
+                />
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://research.nvidia.com/labs/adlr/acemath_rl/'">
-            <div class="flex flex-col sm:flex-row justify-between gap-4">
-              <div class="flex-1">
+          <!-- Project 3 -->
+          <article class="project-card card p-4 sm:p-5">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
-                  <p class="font-semibold text-gray-800 text-lg hover:text-gray-600 transition-colors">AceMath-RL-Nemotron</p>
-                  <!-- <span class="text-xs tracking-wide text-gray-500">Research</span> -->
+                  <a href="https://research.nvidia.com/labs/adlr/acemath_rl/" target="_blank" rel="noopener noreferrer"
+                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
+                    AceMath-RL-Nemotron
+                  </a>
                   <span class="text-xs text-gray-400">April 2025</span>
                 </div>
-                <p class="text-sm text-gray-600 mt-2">I led the research on scaling RL to train LLMs to solve math problems. We trained and released the AceMath-RL-Nemotron-7B model.</p>
+
+                <p class="text-[15px] text-gray-600 mt-2">
+                  I led the research on scaling RL to train LLMs to solve math problems.
+                  We trained and released the AceMath-RL-Nemotron-7B model.
+                </p>
+
                 <div class="flex flex-wrap gap-2 mt-3">
-                  <a href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center w-fit" onclick="event.stopPropagation()">
-                    <!-- <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo"> -->
+                  <a class="chip" href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" target="_blank" rel="noopener noreferrer">
                     Model
                   </a>
-                  <a href="https://research.nvidia.com/labs/adlr/acemath_rl/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition w-fit" onclick="event.stopPropagation()">Research Blog</a>
+                  <a class="chip" href="https://research.nvidia.com/labs/adlr/acemath_rl/" target="_blank" rel="noopener noreferrer">
+                    Research Blog
+                  </a>
                 </div>
               </div>
-              <div class="sm:w-28 sm:h-20 shrink-0">
-                <img src="static/acemath-rl.png" alt="AceMath RL diagram" class="w-full h-full object-cover rounded-md">
+
+              <div class="sm:w-32 sm:h-24 shrink-0">
+                <img
+                  src="static/acemath-rl.png"
+                  alt="AceMath RL diagram"
+                  class="w-full h-full object-cover rounded-xl border border-gray-100"
+                  loading="lazy"
+                />
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='https://research.nvidia.com/labs/adlr/acemath/'">
-            <div class="flex flex-col sm:flex-row justify-between gap-4">
-              <div class="flex-1">
+          <!-- Project 4 -->
+          <article class="project-card card p-4 sm:p-5">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
-                  <p class="font-semibold text-gray-800 text-lg hover:text-gray-600 transition-colors">AceMath</p>
-                  <!-- <span class="text-xs tracking-wide text-gray-500">Research</span> -->
+                  <a href="https://research.nvidia.com/labs/adlr/acemath/" target="_blank" rel="noopener noreferrer"
+                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
+                    AceMath
+                  </a>
                   <span class="text-xs text-gray-400">December 2024</span>
                 </div>
-                <p class="text-sm text-gray-600 mt-2">I co-led the research on developing math reasoning and reward models. We released the AceMath-1.5B, 7B, and 72B models along with AceMath-RM-7B and 72B, which surpass GPT-4o and Qwen2.5-Math at the time.</p>
+
+                <p class="text-[15px] text-gray-600 mt-2">
+                  I co-led the research on developing math reasoning and reward models. We released the AceMath-1.5B, 7B, and 72B
+                  models along with AceMath-RM-7B and 72B, which surpassed GPT-4o and Qwen2.5-Math at the time.
+                </p>
+
                 <div class="flex flex-wrap gap-2 mt-3">
-                  <a href="https://huggingface.co/collections/nvidia/acemath-678917d12f09885479d549fe" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition inline-flex items-center" onclick="event.stopPropagation()">
-                    <!-- <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" class="w-4 h-4 mr-2" alt="Hugging Face Logo"> -->
+                  <a class="chip" href="https://huggingface.co/collections/nvidia/acemath-678917d12f09885479d549fe" target="_blank" rel="noopener noreferrer">
                     Models & Datasets
                   </a>
-                  <a href="https://arxiv.org/abs/2412.15084" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition" onclick="event.stopPropagation()">Findings of ACL'25</a>
-                  <!-- <a href="https://research.nvidia.com/labs/adlr/acemath/" class="px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition" onclick="event.stopPropagation()">Project Page</a> -->
+                  <a class="chip" href="https://arxiv.org/abs/2412.15084" target="_blank" rel="noopener noreferrer">
+                    Findings of ACL'25
+                  </a>
                 </div>
               </div>
-              <div class="sm:w-28 sm:h-20 shrink-0">
-                <img src="static/acemath-pic.png" alt="AceMath visual" class="w-full h-full object-cover rounded-md">
+
+              <div class="sm:w-32 sm:h-24 shrink-0">
+                <img
+                  src="static/acemath-pic.png"
+                  alt="AceMath visual"
+                  class="w-full h-full object-cover rounded-xl border border-gray-100"
+                  loading="lazy"
+                />
               </div>
             </div>
-          </div>
+          </article>
         </div>
+      </section>
 
-        <div class="mb-12"></div>
-        <div>
-          <h3 class="text-sm font-medium mb-2 text-gray-700">Past Work</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start"> <!-- Added 'items-start' here -->
-            <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer relative" onclick="togglePapers('multimodal')">
-              <span class="absolute top-2 text-xs text-gray-500">Research · 2022 - 2024</span>
-              <div class="mb-4"></div>
-              <p class="font-medium text-gray-800 text-lg">Multimodal LLM</p>
+      <!-- Past work -->
+      <section id="past" class="mb-12">
+        <h2 class="text-lg font-medium text-gray-900 mb-4">Past Work</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <details class="card p-4 soft-shadow">
+            <summary class="cursor-pointer list-none">
+              <p class="text-xs text-gray-500 mb-1">Research · 2022–2024</p>
+              <p class="text-lg font-medium text-gray-900">Multimodal LLM</p>
               <p class="text-sm text-gray-500 mt-1">Building AI that understands the visual world</p>
-              <ul id="multimodal-papers" class="hidden mt-4 paper-list text-sm text-gray-600">
-                <li>Visual World Knowledge [<a href="https://arxiv.org/abs/2302.11713" target="_blank">EMNLP'23</a>, <a href="https://arxiv.org/abs/2302.11154" target="_blank">ICCV'23</a> (Oral)]</li>
-                <li>Emergent Visual Privacy Concern [<a href="https://arxiv.org/abs/2407.04952" target="_blank">EMNLP'24</a> (Oral)]</li>
-                <li>Universal Multimodal Retriever [<a href="https://arxiv.org/abs/2311.17136" target="_blank">ECCV'24</a> (Oral)]</li>
-              </ul>
-              <!-- <p class="text-xs text-gray-500 mt-4">2022 - 2024</p> -->
-            </div>
-            <div class="project-card bg-white p-4 rounded-lg shadow-sm border border-gray-100 cursor-pointer relative" onclick="togglePapers('multilingual')">
-              <span class="absolute top-2 text-xs text-gray-500">Research · 2019 - 2024</span>
-              <div class="mb-4"></div>
-              <p class="font-medium text-gray-800 text-lg">Multilingual LLM</p>
+              <p class="text-xs text-gray-400 mt-3">Click to expand</p>
+            </summary>
+
+            <ul class="paper-list mt-4 list-disc pl-5 text-[15px] text-gray-600 space-y-2">
+              <li>
+                Visual World Knowledge
+                [<a href="https://arxiv.org/abs/2302.11713" target="_blank" rel="noopener noreferrer">EMNLP'23</a>,
+                 <a href="https://arxiv.org/abs/2302.11154" target="_blank" rel="noopener noreferrer">ICCV'23</a> (Oral)]
+              </li>
+              <li>
+                Emergent Visual Privacy Concern
+                [<a href="https://arxiv.org/abs/2407.04952" target="_blank" rel="noopener noreferrer">EMNLP'24</a> (Oral)]
+              </li>
+              <li>
+                Universal Multimodal Retriever
+                [<a href="https://arxiv.org/abs/2311.17136" target="_blank" rel="noopener noreferrer">ECCV'24</a> (Oral)]
+              </li>
+            </ul>
+          </details>
+
+          <details class="card p-4 soft-shadow">
+            <summary class="cursor-pointer list-none">
+              <p class="text-xs text-gray-500 mb-1">Research · 2019–2024</p>
+              <p class="text-lg font-medium text-gray-900">Multilingual LLM</p>
               <p class="text-sm text-gray-500 mt-1">Bridging representation across global languages</p>
-              <ul id="multilingual-papers" class="hidden mt-4 paper-list text-sm text-gray-600">
-                <li>Model Selection [<a href="https://arxiv.org/abs/2010.06127" target="_blank">EMNLP'21</a>]</li>
-                <li>Cross-lingual [<a href="https://arxiv.org/abs/2211.15613" target="_blank">ACL'23 Findings</a>, <a href="https://arxiv.org/abs/2402.03131" target="_blank">ICLR'24</a>, <a href="https://arxiv.org/abs/2305.13582" target="_blank">ACL'25</a>]</li>
-                <li>English-Arabic BERT [<a href="https://arxiv.org/abs/2004.14519v4" target="_blank">EMNLP'20</a>]</li>
-              </ul>
-              
-            </div>
-          </div>
+              <p class="text-xs text-gray-400 mt-3">Click to expand</p>
+            </summary>
+
+            <ul class="paper-list mt-4 list-disc pl-5 text-[15px] text-gray-600 space-y-2">
+              <li>
+                Model Selection
+                [<a href="https://arxiv.org/abs/2010.06127" target="_blank" rel="noopener noreferrer">EMNLP'21</a>]
+              </li>
+              <li>
+                Cross-lingual
+                [<a href="https://arxiv.org/abs/2211.15613" target="_blank" rel="noopener noreferrer">ACL'23 Findings</a>,
+                 <a href="https://arxiv.org/abs/2402.03131" target="_blank" rel="noopener noreferrer">ICLR'24</a>,
+                 <a href="https://arxiv.org/abs/2305.13582" target="_blank" rel="noopener noreferrer">ACL'25</a>]
+              </li>
+              <li>
+                English–Arabic BERT
+                [<a href="https://arxiv.org/abs/2004.14519v4" target="_blank" rel="noopener noreferrer">EMNLP'20</a>]
+              </li>
+            </ul>
+          </details>
         </div>
-        
-        <script>
-          function togglePapers(category) {
-            const papersList = document.getElementById(`${category}-papers`);
-            if (papersList) {
-              papersList.classList.toggle('hidden');
-            }
-          }
-        </script>
-      </body>
+      </section>
+
+      <footer class="pb-10">
+        <div class="text-sm text-gray-500 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <p>© <span id="year"></span> Yang Chen</p>
+          <p class="text-gray-400">Simple, calm UI</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
