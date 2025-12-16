@@ -135,7 +135,7 @@
       <!-- About -->
       <section id="about" class="card soft-shadow p-6 mb-6">
         <p class="text-[15px] sm:text-base text-gray-600">
-          I am a Research Scientist @ NVIDIA (ADLR Group). I received my Ph.D. from Georgia Tech in August 2024.
+          I am a Research Scientist at NVIDIA (ADLR Group). I received my Ph.D. from Georgia Tech in August 2024.
           <br /><br />
           I currently work on scaling reinforcement learning for reasoning LLMs.
         </p>
@@ -169,7 +169,47 @@
         <div class="space-y-4">
           <!-- Project 1 -->
           <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline flex-wrap gap-2">
+                  <a href="https://arxiv.org/abs/2512.13607" target="_blank" rel="noopener noreferrer"
+                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
+                    Nemotron-Cascade
+                  </a>
+                  <span class="text-xs text-gray-400">December 2025</span>
+                </div>
+
+                <p class="text-[15px] text-gray-600 mt-2">
+                  We scale Cascade RL to train general-purpose reasoning LLMs spanning RLHF, instruction following, math, code, and SWE.
+                  Our 14B Thinking model achieves SOTA on LiveCodeBench—outperforming Gemini-2.5-Pro, o4-mini, Qwen3-235B, DeepSeek-R1-671B, and reaches silver-medal performance at IOI 2025.
+                </p>
+
+                <div class="flex flex-wrap gap-2 mt-3">
+                  <a class="chip" href="https://huggingface.co/collections/nvidia/nemotron-cascade" target="_blank" rel="noopener noreferrer">
+                    Models
+                  </a>
+                  <a class="chip" href="https://huggingface.co/collections/nvidia/nemotron-cascade" target="_blank" rel="noopener noreferrer">
+                    Training Data
+                  </a>
+                  <a class="chip" href="https://arxiv.org/abs/2512.13607" target="_blank" rel="noopener noreferrer">
+                    Technical Report
+                  </a>
+                </div>
+              </div>
+
+              <div class="sm:w-32 sm:h-24 shrink-0">
+                <img
+                  src="static/cascade-rl.png"
+                  alt="CascadeRL overview"
+                  class="w-full h-full object-cover rounded-xl border border-gray-100"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card card p-4 sm:p-5">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
               <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
                   <a href="https://arxiv.org/abs/2506.13284" target="_blank" rel="noopener noreferrer"
@@ -180,8 +220,7 @@
                 </div>
 
                 <p class="text-[15px] text-gray-600 mt-2">
-                  Building on prior work, I contributed to research combining large-scale supervised fine-tuning with RL.
-                  We released the SOTA 7B model — AceReason-Nemotron-1.1-7B.
+                  We further scaled the SFT and studied the interplay with RL, and released the SOTA 7B model, AceReason-Nemotron-1.1-7B.
                 </p>
 
                 <div class="flex flex-wrap gap-2 mt-3">
@@ -210,7 +249,7 @@
 
           <!-- Project 2 -->
           <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
               <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
                   <a href="https://arxiv.org/abs/2505.16400" target="_blank" rel="noopener noreferrer"
@@ -221,8 +260,7 @@
                 </div>
 
                 <p class="text-[15px] text-gray-600 mt-2">
-                  I co-led the effort to scale the previous work to both math and code domains.
-                  We released the SOTA medium-size model — AceReason-Nemotron-14B.
+                  We scaled the previous work to both math and code domains and released the SOTA medium-sized model, AceReason-Nemotron-14B.
                 </p>
 
                 <div class="flex flex-wrap gap-2 mt-3">
@@ -251,7 +289,7 @@
 
           <!-- Project 3 -->
           <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
               <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
                   <a href="https://research.nvidia.com/labs/adlr/acemath_rl/" target="_blank" rel="noopener noreferrer"
@@ -262,8 +300,8 @@
                 </div>
 
                 <p class="text-[15px] text-gray-600 mt-2">
-                  I led the research on scaling RL to train LLMs to solve math problems.
-                  We trained and released the AceMath-RL-Nemotron-7B model.
+                  Our pilot study on scaling RL for competitive math reasoning LLMs.
+                  We released the AceMath-RL-Nemotron-7B model.
                 </p>
 
                 <div class="flex flex-wrap gap-2 mt-3">
@@ -289,7 +327,7 @@
 
           <!-- Project 4 -->
           <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
               <div class="flex-1 min-w-0">
                 <div class="flex items-baseline flex-wrap gap-2">
                   <a href="https://research.nvidia.com/labs/adlr/acemath/" target="_blank" rel="noopener noreferrer"
@@ -300,8 +338,8 @@
                 </div>
 
                 <p class="text-[15px] text-gray-600 mt-2">
-                  I co-led the research on developing math reasoning and reward models. We released the AceMath-1.5B, 7B, and 72B
-                  models along with AceMath-RM-7B and 72B, which surpassed GPT-4o and Qwen2.5-Math at the time.
+                  We worked on developing math reasoning and reward models, and released AceMath-1.5B, 7B, and 72B,
+                  along with AceMath-RM-7B and 72B, which surpassed GPT-4o and Qwen2.5-Math at the time.
                 </p>
 
                 <div class="flex flex-wrap gap-2 mt-3">
