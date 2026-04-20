@@ -1,484 +1,989 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yang Chen</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yang Chen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "variant": "lab",
+  "accent": "#B0542B"
+}/*EDITMODE-END*/;
+</script>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #F3EDE2;
+    --paper-2: #EDE5D6;
+    --paper-3: #E4D9C4;
+    --ink: #1C1815;
+    --ink-2: #3A332C;
+    --ink-3: #6B5F50;
+    --ink-4: #9A8E7C;
+    --rule: #D6C9B0;
+    --rule-soft: #E0D5BE;
+    --accent: #B0542B;
+    --accent-2: #8A4220;
 
-  <!-- Optional: Google Analytics (load ONCE, configure multiple IDs if needed) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KCXSPDD83"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0KCXSPDD83');      // GA4
-    gtag('config', 'UA-37166920-1');     // UA (legacy) — remove if not needed
-  </script>
+    --serif: "Instrument Serif", ui-serif, Georgia, serif;
+    --sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: inherit; text-decoration: none; }
+  p { margin: 0 0 1em; }
 
-  <style>
-    :root{
-      --bg: #faf9f6;
-      --card: #ffffff;
-      --border: #eef2f7;
-      --text: #111827;
-      --muted: #6b7280;
-      --shadow: 0 10px 30px rgba(0,0,0,.06);
-      --paperLink: #e67e22;
-      --paperLinkHover: #d35400;
-    }
+  /* paper grain */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(rgba(90,70,40,0.035) 1px, transparent 1px),
+      radial-gradient(rgba(90,70,40,0.025) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 2px;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+  }
+  #app { position: relative; z-index: 1; }
 
-    body{
-      background: var(--bg);
-      font-family: 'Poppins', sans-serif;
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
+  /* ============ TOP NAV ============ */
+  .topnav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(8px);
+    background: color-mix(in oklab, var(--paper) 82%, transparent);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .topnav-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent);
+  }
+  .topnav nav {
+    display: flex; gap: 28px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .topnav nav a {
+    position: relative;
+    padding: 4px 0;
+    transition: color .2s;
+  }
+  .topnav nav a:hover { color: var(--accent); }
+  .topnav nav a::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .topnav nav a:hover::after { transform: scaleX(1); }
 
-    p, li { line-height: 1.75; }
+  /* ============ SHELL ============ */
+  .shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
 
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
+  /* section label */
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-label::before {
+    content: "";
+    width: 18px; height: 1px; background: var(--ink-4);
+  }
 
-    .soft-shadow{ box-shadow: 0 1px 0 rgba(0,0,0,.02); }
+  /* Fade-in on scroll */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.in { opacity: 1; transform: none; }
 
-    .project-card{
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .project-card:hover{
-      transform: translateY(-2px);
-      border-color: rgba(0,0,0,.08);
-      box-shadow: var(--shadow);
-    }
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 0 60px;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 80px;
+    align-items: end;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-left { display: flex; align-items: flex-end; gap: 36px; min-width: 0; }
+  .hero-title { flex: 1; min-width: 0; }
+  .hero-photo {
+    flex-shrink: 0;
+    width: 180px; height: 220px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: var(--paper-2);
+    box-shadow: 0 12px 32px -14px rgba(60,40,20,0.25);
+    margin-bottom: 12px;
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 32px;
+    display: flex; gap: 22px; flex-wrap: wrap;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 8px; }
+  .hero-meta .dash { color: var(--ink-4); }
 
-    .chip{
-      background: rgba(17,24,39,.04);
-      border: 1px solid rgba(17,24,39,.06);
-      border-radius: 9999px;
-      padding: .45rem .85rem;
-      font-size: .875rem;
-      color: rgba(17,24,39,.78);
-      transition: background .15s ease, transform .15s ease;
-      text-decoration: none;
-    }
-    .chip:hover{
-      background: rgba(17,24,39,.06);
-      transform: translateY(-1px);
-      text-decoration: none;
-    }
+  h1.hero-name {
+    margin: 0 0 28px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(64px, 9vw, 136px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  h1.hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-lede {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35;
+    color: var(--ink-2);
+    max-width: 640px;
+    margin: 0 0 32px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .hero-right {
+    padding-bottom: 8px;
+  }
+  .hero-bio {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 360px;
+  }
+  .hero-bio strong { color: var(--ink); font-weight: 500; }
+  .hero-links {
+    margin-top: 24px;
+    display: flex; flex-direction: column; gap: 1px;
+    border-top: 1px solid var(--rule);
+    max-width: 360px;
+  }
+  .hero-links a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--ink-2);
+    transition: color .2s, padding .3s cubic-bezier(.4,0,.2,1);
+  }
+  .hero-links a:hover {
+    color: var(--accent);
+    padding-left: 12px;
+  }
+  .hero-links a .label { display: flex; gap: 14px; align-items: baseline; }
+  .hero-links a .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    letter-spacing: 0.08em;
+  }
+  .hero-links a .arrow {
+    font-family: var(--mono);
+    color: var(--ink-4);
+    transition: transform .3s cubic-bezier(.4,0,.2,1), color .2s;
+  }
+  .hero-links a:hover .arrow { transform: translateX(4px); color: var(--accent); }
 
-    /* Paper list styling like your original */
-    .paper-list a{
-      text-decoration: underline;
-      color: var(--paperLink);
-    }
-    .paper-list a:hover{
-      color: var(--paperLinkHover);
-    }
+  /* status pill */
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    padding: 6px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    background: color-mix(in oklab, var(--paper-2) 60%, transparent);
+  }
+  .status-pill .blip {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #5A8F4A;
+    box-shadow: 0 0 0 3px color-mix(in oklab, #5A8F4A 25%, transparent);
+    animation: blip 2.4s ease-in-out infinite;
+  }
+  @keyframes blip {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
 
-    @media (prefers-reduced-motion: reduce) {
-      .project-card, .chip { transition: none; }
-      .project-card:hover{ transform: none; }
-    }
-  </style>
+  /* ============ SECTION HEAD ============ */
+  .section {
+    padding: 96px 0 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 80px;
+    align-items: baseline;
+    margin-bottom: 56px;
+  }
+  .section-head h2 {
+    margin: 12px 0 0;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .section-head .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .section-head .desc {
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 360px;
+  }
+
+  /* ============ PROJECTS (editorial mode) ============ */
+  .projects { display: flex; flex-direction: column; }
+  .project {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) minmax(260px, 340px);
+    gap: 32px;
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+    transition: background .3s;
+  }
+  .project:hover { background: color-mix(in oklab, var(--paper-2) 50%, transparent); }
+  .project:last-child { border-bottom: 1px solid var(--rule); }
+  .project .idx {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    padding-top: 6px;
+  }
+  .project .date {
+    display: block;
+    color: var(--ink-4);
+    margin-top: 4px;
+  }
+  .project-main h3 {
+    margin: 0 0 6px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    transition: color .3s;
+  }
+  .project:hover .project-main h3 { color: var(--accent); }
+  .project .venue {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .project .abstract {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin: 0 0 18px;
+  }
+  .project .refs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .project .refs a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 6px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    color: var(--ink-2);
+    background: var(--paper);
+    transition: all .2s;
+  }
+  .project .refs a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--paper-2);
+  }
+  .project-figure {
+    aspect-ratio: 4/3;
+    background: #FDFBF5;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 14px;
+  }
+  .project-figure .fig-caption {
+    position: absolute;
+    top: 12px; left: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .project-figure .fig-num {
+    position: absolute;
+    bottom: 12px; right: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-4);
+  }
+
+  /* ============ PAST WORK ============ */
+  .past {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .past-card {
+    padding: 28px 28px 24px;
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--paper-2) 40%, transparent);
+    border-radius: 4px;
+    transition: all .3s;
+  }
+  .past-card:hover {
+    border-color: color-mix(in oklab, var(--accent) 45%, var(--rule));
+    background: color-mix(in oklab, var(--paper-2) 75%, transparent);
+  }
+  .past-card .p-kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 18px;
+    display: flex; justify-content: space-between;
+  }
+  .past-card h4 {
+    margin: 0 0 10px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .past-card .p-desc {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+  .past-card ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 2px;
+    border-top: 1px solid var(--rule);
+  }
+  .past-card li {
+    padding: 10px 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .past-card li .topic { flex: 1; }
+  .past-card li .venues {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .past-card li .venue-chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    color: var(--ink-3);
+    transition: color .2s, border-color .2s;
+  }
+  .past-card li .venue-chip:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .past-card li .venue-chip.oral { color: var(--accent); border-color: color-mix(in oklab, var(--accent) 40%, var(--rule)); }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    padding: 80px 0 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .footer .f-big {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 16px 0 0;
+  }
+  .footer .f-big em { color: var(--accent); font-style: italic; }
+  .footer .f-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex; flex-direction: column; gap: 6px;
+    text-align: right;
+  }
+
+  /* ============ RESEARCH LAB VARIANT OVERRIDES ============ */
+  body[data-variant="lab"] {
+    --paper: #EFE8DB;
+    --paper-2: #E6DCC8;
+  }
+  body[data-variant="lab"] h1.hero-name,
+  body[data-variant="lab"] .hero-lede,
+  body[data-variant="lab"] .section-head h2,
+  body[data-variant="lab"] .project-main h3,
+  body[data-variant="lab"] .past-card h4,
+  body[data-variant="lab"] .footer .f-big {
+    font-family: var(--sans);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+  body[data-variant="lab"] h1.hero-name {
+    font-weight: 600;
+    font-size: clamp(56px, 7.5vw, 104px);
+    line-height: 0.95;
+  }
+  body[data-variant="lab"] h1.hero-name em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  body[data-variant="lab"] .hero-lede {
+    font-size: clamp(18px, 1.7vw, 22px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  body[data-variant="lab"] .section-head h2 {
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 600;
+  }
+  body[data-variant="lab"] .project-main h3 {
+    font-size: clamp(22px, 2.2vw, 30px);
+    font-weight: 600;
+  }
+  body[data-variant="lab"] .past-card h4 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  body[data-variant="lab"] .footer .f-big {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 500;
+  }
+  body[data-variant="lab"] .footer .f-big em { font-style: normal; }
+
+  /* Lab variant: timeline style for projects */
+  body[data-variant="lab"] .project {
+    grid-template-columns: 110px minmax(0,1fr) minmax(240px, 320px);
+    gap: 36px;
+  }
+  body[data-variant="lab"] .project .idx {
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+    position: relative;
+  }
+  body[data-variant="lab"] .project .idx::before {
+    content: "";
+    position: absolute;
+    left: -5px; top: 10px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--paper);
+  }
+  body[data-variant="lab"] .project:hover .idx::before {
+    transform: scale(1.3);
+    transition: transform .3s;
+  }
+
+  body[data-variant="lab"] .project-figure {
+    aspect-ratio: 4/3;
+    background: #FDFBF5;
+  }
+
+  /* ============ TWEAKS PANEL ============ */
+  .tweaks-panel {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 100;
+    background: #FDFAF3;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 20px;
+    min-width: 260px;
+    box-shadow: 0 12px 40px -12px rgba(60,40,20,0.25);
+    font-family: var(--sans);
+    display: none;
+  }
+  .tweaks-panel.active { display: block; }
+  .tweaks-panel h5 {
+    margin: 0 0 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex; justify-content: space-between;
+  }
+  .tweak-group { margin-bottom: 14px; }
+  .tweak-group:last-child { margin-bottom: 0; }
+  .tweak-label {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .variant-toggle {
+    display: flex;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .variant-toggle button {
+    flex: 1;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 9px 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-3);
+    transition: all .2s;
+  }
+  .variant-toggle button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .accent-swatches {
+    display: flex; gap: 8px;
+  }
+  .accent-swatches button {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--rule);
+    cursor: pointer;
+    transition: transform .2s, border-color .2s;
+  }
+  .accent-swatches button.active {
+    border-color: var(--ink);
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 1100px) {
+    .project { grid-template-columns: 72px minmax(0,1fr) minmax(220px, 280px); gap: 24px; }
+    body[data-variant="lab"] .project { grid-template-columns: 80px minmax(0,1fr) minmax(220px, 280px); gap: 28px; }
+    .project-main h3 { font-size: clamp(22px, 2.4vw, 32px); }
+  }
+  @media (max-width: 880px) {
+    .project { grid-template-columns: 1fr; gap: 18px; }
+    body[data-variant="lab"] .project { grid-template-columns: 1fr; gap: 18px; }
+    body[data-variant="lab"] .project .idx { border-left: none; padding-left: 0; }
+    body[data-variant="lab"] .project .idx::before { display: none; }
+    .project-figure { max-width: 520px; }
+  }
+  @media (max-width: 900px) {
+    .shell { padding: 0 24px; }
+    .topnav-inner { padding: 14px 24px; }
+    .topnav nav { gap: 16px; }
+    .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 40px; }
+    .hero-left { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .hero-photo { width: 140px; height: 170px; }
+    .section-head { grid-template-columns: 1fr; gap: 20px; }
+    .past { grid-template-columns: 1fr; }
+    .footer { grid-template-columns: 1fr; gap: 40px; }
+    .footer .f-meta { text-align: left; }
+  }
+</style>
 </head>
+<body>
+<div id="app">
 
-<body class="p-5 sm:p-8">
-  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:border focus:border-gray-200 focus:rounded-lg focus:px-4 focus:py-2">
-    Skip to content
-  </a>
-
-  <div class="max-w-3xl mx-auto">
-    <header class="mb-6">
-      <div class="flex items-center justify-between gap-4">
-        <p class="text-sm text-gray-500">Research Scientist @ NVIDIA</p>
-
-        <nav class="hidden sm:flex items-center gap-4 text-sm text-gray-600">
-          <a href="#about" class="hover:text-gray-900 hover:no-underline">About</a>
-          <a href="#projects" class="hover:text-gray-900 hover:no-underline">Projects</a>
-          <a href="#past" class="hover:text-gray-900 hover:no-underline">Past Work</a>
-          <a href="#contact" class="hover:text-gray-900 hover:no-underline">Contact</a>
-        </nav>
-      </div>
-    </header>
-
-    <main id="main">
-      <!-- Hero -->
-      <section class="mb-6">
-        <div class="flex items-center gap-4">
-          <div class="w-20 h-20 shrink-0 relative">
-            <img
-              src="static/yang.png"
-              alt="Yang Chen"
-              class="w-full h-full object-cover rounded-2xl border border-gray-100"
-              loading="lazy"
-            />
-          </div>
-          <div class="min-w-0">
-            <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Yang Chen</h1>
-          </div>
-        </div>
-      </section>
-
-      <!-- About -->
-      <section id="about" class="card soft-shadow p-6 mb-6">
-        <p class="text-[15px] sm:text-base text-gray-600">
-          I am a Research Scientist at NVIDIA (ADLR Group). I received my Ph.D. from Georgia Tech in August 2024.
-          <br /><br />
-          I currently work on scaling reinforcement learning for reasoning LLMs.
-        </p>
-      </section>
-
-      <!-- Links -->
-      <section id="contact" class="mb-8">
-        <div class="flex flex-wrap gap-2">
-          <a class="chip" href="https://scholar.google.com/citations?user=o-oBMWEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
-            Google Scholar
-          </a>
-          <a class="chip" href="https://drive.google.com/file/d/17wRWA4Nspj_RcVaLLZCae_n7pdHlNoKv/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-            CV
-          </a>
-          <a class="chip inline-flex items-center gap-2" href="https://twitter.com/ychenNLP" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-            
-          </a>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects" class="mb-10">
-        <div class="flex items-baseline justify-between gap-4 mb-4">
-          <h2 class="text-lg font-medium text-gray-900">Selected Projects</h2>
-          <p class="text-sm text-gray-500 hidden sm:block">Recent work</p>
-        </div>
-
-        <div class="space-y-4">
-          <!-- Project 1 -->
-          <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline flex-wrap gap-2">
-                  <a href="https://arxiv.org/abs/2603.19220" target="_blank" rel="noopener noreferrer"
-                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
-                    Nemotron-Cascade 2
-                  </a>
-                  <span class="text-xs text-gray-400">March 2026</span>
-                </div>
-
-                <p class="text-[15px] text-gray-600 mt-2">
-                  We scale Cascade RL and multi-domain on-policy distillation to train Nemotron-Cascade-2-30B-A3B, which achieves gold-medal-level results on IMO, IOI, and ICPC World Finals, along with strong performance on ArenaHard and instruction following.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <a class="chip" href="https://huggingface.co/nvidia/Nemotron-Cascade-2-30B-A3B" target="_blank" rel="noopener noreferrer">
-                    Model
-                  </a>
-                  <a class="chip" href="https://huggingface.co/datasets/nvidia/Nemotron-Cascade-2-SFT-Data" target="_blank" rel="noopener noreferrer">
-                    Data
-                  </a>
-                  <a class="chip" href="https://huggingface.co/collections/nvidia/nemotron-cascade-2" target="_blank" rel="noopener noreferrer">
-                    Collection
-                  </a>
-                  <a class="chip" href="https://arxiv.org/abs/2603.19220" target="_blank" rel="noopener noreferrer">
-                    Technical Report
-                  </a>
-                </div>
-              </div>
-
-              <div class="sm:w-44 sm:h-28 shrink-0">
-                <img
-                  src="static/nemotron-cascade-2-benchmarks.png"
-                  alt="Nemotron-Cascade 2 benchmark comparison figure"
-                  class="w-full h-full object-contain rounded-xl border border-gray-100 bg-white p-1"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline flex-wrap gap-2">
-                  <a href="https://arxiv.org/abs/2512.13607" target="_blank" rel="noopener noreferrer"
-                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
-                    Nemotron-Cascade
-                  </a>
-                  <span class="text-xs text-gray-400">December 2025</span>
-                </div>
-
-                <p class="text-[15px] text-gray-600 mt-2">
-                  We scale Cascade RL to train general-purpose reasoning LLMs spanning RLHF, instruction following, math, code, and SWE.
-                  Our 14B Thinking model achieves SOTA on LiveCodeBench—outperforming Gemini-2.5-Pro, o4-mini, Qwen3-235B, DeepSeek-R1-671B, and reaches silver-medal performance at IOI 2025.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <a class="chip" href="https://huggingface.co/collections/nvidia/nemotron-cascade" target="_blank" rel="noopener noreferrer">
-                    Models
-                  </a>
-                  <a class="chip" href="https://huggingface.co/collections/nvidia/nemotron-cascade" target="_blank" rel="noopener noreferrer">
-                    Training Data
-                  </a>
-                  <a class="chip" href="https://arxiv.org/abs/2512.13607" target="_blank" rel="noopener noreferrer">
-                    Technical Report
-                  </a>
-                </div>
-              </div>
-
-              <div class="sm:w-32 sm:h-24 shrink-0">
-                <img
-                  src="static/cascade-rl.png"
-                  alt="CascadeRL overview"
-                  class="w-full h-full object-cover rounded-xl border border-gray-100"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline flex-wrap gap-2">
-                  <a href="https://arxiv.org/abs/2506.13284" target="_blank" rel="noopener noreferrer"
-                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
-                    AceReason-Nemotron 1.1
-                  </a>
-                  <span class="text-xs text-gray-400">June 2025</span>
-                </div>
-
-                <p class="text-[15px] text-gray-600 mt-2">
-                  We further scaled the SFT and studied the interplay with RL, and released the SOTA 7B model, AceReason-Nemotron-1.1-7B.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <a class="chip" href="https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" target="_blank" rel="noopener noreferrer">
-                    Models
-                  </a>
-                  <a class="chip" href="https://huggingface.co/datasets/nvidia/AceReason-1.1-SFT" target="_blank" rel="noopener noreferrer">
-                    Training Data
-                  </a>
-                  <a class="chip" href="https://arxiv.org/abs/2506.13284" target="_blank" rel="noopener noreferrer">
-                    ICLR'26
-                  </a>
-                </div>
-              </div>
-
-              <div class="sm:w-32 sm:h-24 shrink-0">
-                <img
-                  src="static/acereason1.1.png"
-                  alt="AceReason 1.1 overview"
-                  class="w-full h-full object-cover rounded-xl border border-gray-100"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline flex-wrap gap-2">
-                  <a href="https://arxiv.org/abs/2505.16400" target="_blank" rel="noopener noreferrer"
-                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
-                    AceReason-Nemotron
-                  </a>
-                  <span class="text-xs text-gray-400">May 2025</span>
-                </div>
-
-                <p class="text-[15px] text-gray-600 mt-2">
-                  We scaled the previous work to both math and code domains and released the SOTA medium-sized model, AceReason-Nemotron-14B.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <a class="chip" href="https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" target="_blank" rel="noopener noreferrer">
-                    Models
-                  </a>
-                  <a class="chip" href="https://huggingface.co/datasets/nvidia/AceReason-Math" target="_blank" rel="noopener noreferrer">
-                    Training Data
-                  </a>
-                  <a class="chip" href="https://arxiv.org/abs/2505.16400" target="_blank" rel="noopener noreferrer">
-                    NeurIPS'25
-                  </a>
-                </div>
-              </div>
-
-              <div class="sm:w-32 sm:h-24 shrink-0">
-                <img
-                  src="static/acereason.png"
-                  alt="AceReason overview"
-                  class="w-full h-full object-cover rounded-xl border border-gray-100"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 3 -->
-          <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline flex-wrap gap-2">
-                  <a href="https://research.nvidia.com/labs/adlr/acemath_rl/" target="_blank" rel="noopener noreferrer"
-                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
-                    AceMath-RL-Nemotron
-                  </a>
-                  <span class="text-xs text-gray-400">April 2025</span>
-                </div>
-
-                <p class="text-[15px] text-gray-600 mt-2">
-                  Our pilot study on scaling RL for competitive math reasoning LLMs.
-                  We released the AceMath-RL-Nemotron-7B model.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <a class="chip" href="https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" target="_blank" rel="noopener noreferrer">
-                    Model
-                  </a>
-                  <a class="chip" href="https://research.nvidia.com/labs/adlr/acemath_rl/" target="_blank" rel="noopener noreferrer">
-                    Research Blog
-                  </a>
-                </div>
-              </div>
-
-              <div class="sm:w-32 sm:h-24 shrink-0">
-                <img
-                  src="static/acemath-rl.png"
-                  alt="AceMath RL diagram"
-                  class="w-full h-full object-cover rounded-xl border border-gray-100"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 4 -->
-          <article class="project-card card p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline flex-wrap gap-2">
-                  <a href="https://research.nvidia.com/labs/adlr/acemath/" target="_blank" rel="noopener noreferrer"
-                     class="text-lg font-semibold text-gray-900 hover:text-gray-700 hover:no-underline">
-                    AceMath
-                  </a>
-                  <span class="text-xs text-gray-400">December 2024</span>
-                </div>
-
-                <p class="text-[15px] text-gray-600 mt-2">
-                  We worked on developing math reasoning and reward models, and released AceMath-1.5B, 7B, and 72B,
-                  along with AceMath-RM-7B and 72B, which surpassed GPT-4o and Qwen2.5-Math at the time.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <a class="chip" href="https://huggingface.co/collections/nvidia/acemath-678917d12f09885479d549fe" target="_blank" rel="noopener noreferrer">
-                    Models & Datasets
-                  </a>
-                  <a class="chip" href="https://arxiv.org/abs/2412.15084" target="_blank" rel="noopener noreferrer">
-                    Findings of ACL'25
-                  </a>
-                </div>
-              </div>
-
-              <div class="sm:w-32 sm:h-24 shrink-0">
-                <img
-                  src="static/acemath-pic.png"
-                  alt="AceMath visual"
-                  class="w-full h-full object-cover rounded-xl border border-gray-100"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Past work -->
-      <section id="past" class="mb-12">
-        <h2 class="text-lg font-medium text-gray-900 mb-4">Past Work</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <details class="card p-4 soft-shadow">
-            <summary class="cursor-pointer list-none">
-              <p class="text-xs text-gray-500 mb-1">Research · 2022–2024</p>
-              <p class="text-lg font-medium text-gray-900">Multimodal LLM</p>
-              <p class="text-sm text-gray-500 mt-1">Building AI that understands the visual world</p>
-              <p class="text-xs text-gray-400 mt-3">Click to expand</p>
-            </summary>
-
-            <ul class="paper-list mt-4 list-disc pl-5 text-[15px] text-gray-600 space-y-2">
-              <li>
-                Visual World Knowledge
-                [<a href="https://arxiv.org/abs/2302.11713" target="_blank" rel="noopener noreferrer">EMNLP'23</a>,
-                 <a href="https://arxiv.org/abs/2302.11154" target="_blank" rel="noopener noreferrer">ICCV'23</a> (Oral)]
-              </li>
-              <li>
-                Emergent Visual Privacy Concern
-                [<a href="https://arxiv.org/abs/2407.04952" target="_blank" rel="noopener noreferrer">EMNLP'24</a> (Oral)]
-              </li>
-              <li>
-                Universal Multimodal Retriever
-                [<a href="https://arxiv.org/abs/2311.17136" target="_blank" rel="noopener noreferrer">ECCV'24</a> (Oral)]
-              </li>
-            </ul>
-          </details>
-
-          <details class="card p-4 soft-shadow">
-            <summary class="cursor-pointer list-none">
-              <p class="text-xs text-gray-500 mb-1">Research · 2019–2024</p>
-              <p class="text-lg font-medium text-gray-900">Multilingual LLM</p>
-              <p class="text-sm text-gray-500 mt-1">Bridging representation across global languages</p>
-              <p class="text-xs text-gray-400 mt-3">Click to expand</p>
-            </summary>
-
-            <ul class="paper-list mt-4 list-disc pl-5 text-[15px] text-gray-600 space-y-2">
-              <li>
-                Model Selection
-                [<a href="https://arxiv.org/abs/2010.06127" target="_blank" rel="noopener noreferrer">EMNLP'21</a>]
-              </li>
-              <li>
-                Cross-lingual
-                [<a href="https://arxiv.org/abs/2211.15613" target="_blank" rel="noopener noreferrer">ACL'23 Findings</a>,
-                 <a href="https://arxiv.org/abs/2402.03131" target="_blank" rel="noopener noreferrer">ICLR'24</a>,
-                 <a href="https://arxiv.org/abs/2305.13582" target="_blank" rel="noopener noreferrer">ACL'25</a>]
-              </li>
-              <li>
-                English–Arabic BERT
-                [<a href="https://arxiv.org/abs/2004.14519v4" target="_blank" rel="noopener noreferrer">EMNLP'20</a>]
-              </li>
-            </ul>
-          </details>
-        </div>
-      </section>
-
-      <footer class="pb-10">
-        <div class="text-sm text-gray-500 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <p>© <span id="year"></span> Yang Chen</p>
-          <p class="text-gray-400 flex items-center gap-3">
-            <span>Simple, calm UI</span>
-            <a href="tools.html" class="hover:text-gray-600 hover:no-underline">Tools</a>
-          </p>
-        </div>
-      </footer>
-    </main>
+  <div class="topnav">
+    <div class="topnav-inner">
+      <div class="brand"><span class="dot"></span>YANG CHEN · NVIDIA ADLR</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#past">Past Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </div>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <main class="shell">
+
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div class="hero-left">
+        <div class="hero-photo">
+          <img src="static/yang.jpg" alt="Yang Chen" onerror="this.onerror=null;this.src='static/yang.png'"/>
+        </div>
+        <div class="hero-title">
+        <h1 class="hero-name">Yang <em>Chen</em></h1>
+        <p class="hero-lede">
+          Research Scientist at NVIDIA (ADLR), scaling reinforcement learning for reasoning LLMs.
+        </p>
+        </div>
+      </div>
+      <div class="hero-right reveal">
+        <div class="sec-label" style="margin-bottom: 18px;">Currently</div>
+        <div class="hero-bio">
+          I work on <strong>Cascade RL</strong> and multi-domain distillation for frontier open models —
+          math, code, and agents. Previously Ph.D. at <strong>Georgia Tech</strong> (2024), with research on
+          multimodal and multilingual language models.
+        </div>
+        <div class="hero-links">
+          <a href="https://scholar.google.com/citations?user=o-oBMWEAAAAJ&hl=en"><span class="label"><span class="num">01</span>Google Scholar</span><span class="arrow">→</span></a>
+          <a href="https://drive.google.com/file/d/17wRWA4Nspj_RcVaLLZCae_n7pdHlNoKv/view?usp=sharing"><span class="label"><span class="num">02</span>Curriculum Vitae</span><span class="arrow">→</span></a>
+          <a href="/cdn-cgi/l/email-protection#2f564e4c474a416f4159464b464e014c4042"><span class="label"><span class="num">03</span><span class="__cf_email__" data-cfemail="c8b1a9aba0ada688a6bea1aca1a9e6aba7a5">[email&#160;protected]</span></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div>
+          <div class="sec-label">§ 01 — Selected Projects</div>
+          <h2>Recent research.</h2>
+        </div>
+        <div class="desc">
+          A few projects I've led or contributed to at NVIDIA ADLR. Most ship as open models
+          with training data released on Hugging Face.
+        </div>
+      </div>
+
+      <div class="projects" id="projects-list"></div>
+    </section>
+
+    <!-- PAST WORK -->
+    <section class="section" id="past">
+      <div class="section-head">
+        <div>
+          <div class="sec-label">§ 02 — Past Work</div>
+          <h2>Earlier threads<br/>from 2019–2024.</h2>
+        </div>
+        <div class="desc">
+          Research directions I pursued during my Ph.D. at Georgia Tech — multimodal understanding
+          and cross-lingual representation for language models.
+        </div>
+      </div>
+
+      <div class="past">
+        <div class="past-card reveal">
+          <div class="p-kicker"><span>2022 — 2024</span><span>04 papers</span></div>
+          <h4>Multimodal&nbsp;LLM</h4>
+          <p class="p-desc">Building AI that understands the visual world — world knowledge, privacy, and universal multimodal retrieval.</p>
+          <ul>
+            <li>
+              <span class="topic">Visual World Knowledge</span>
+              <span class="venues">
+                <a class="venue-chip" href="https://arxiv.org/abs/2302.11713">EMNLP'23</a>
+                <a class="venue-chip oral" href="https://arxiv.org/abs/2302.11154">ICCV'23 Oral</a>
+              </span>
+            </li>
+            <li>
+              <span class="topic">Emergent Visual Privacy</span>
+              <span class="venues">
+                <a class="venue-chip oral" href="https://arxiv.org/abs/2407.04952">EMNLP'24 Oral</a>
+              </span>
+            </li>
+            <li>
+              <span class="topic">Universal Multimodal Retriever</span>
+              <span class="venues">
+                <a class="venue-chip oral" href="https://arxiv.org/abs/2311.17136">ECCV'24 Oral</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="past-card reveal">
+          <div class="p-kicker"><span>2019 — 2024</span><span>04 papers</span></div>
+          <h4>Multilingual&nbsp;LLM</h4>
+          <p class="p-desc">Bridging representation across global languages — model selection, cross-lingual transfer, and low-resource scripts.</p>
+          <ul>
+            <li>
+              <span class="topic">Model Selection</span>
+              <span class="venues">
+                <a class="venue-chip" href="https://arxiv.org/abs/2010.06127">EMNLP'21</a>
+              </span>
+            </li>
+            <li>
+              <span class="topic">Cross-lingual Transfer</span>
+              <span class="venues">
+                <a class="venue-chip" href="https://arxiv.org/abs/2211.15613">ACL'23</a>
+                <a class="venue-chip" href="https://arxiv.org/abs/2402.03131">ICLR'24</a>
+                <a class="venue-chip" href="https://arxiv.org/abs/2305.13582">ACL'25</a>
+              </span>
+            </li>
+            <li>
+              <span class="topic">English–Arabic BERT</span>
+              <span class="venues">
+                <a class="venue-chip" href="https://arxiv.org/abs/2004.14519v4">EMNLP'20</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="footer" id="contact">
+      <div>
+        <div class="sec-label">§ 03 — Contact</div>
+        <div class="f-big">Let's <em>talk</em> research.</div>
+        <p style="margin-top:24px; max-width:440px; color:var(--ink-2); font-size:15px; line-height:1.6;">
+          I'm always happy to chat about reasoning, RL, and LLM post-training. Reach out by email
+          or find me on Google Scholar.
+        </p>
+      </div>
+      <div class="f-meta">
+        <span>© Yang Chen · MMXXVI</span>
+        <span>Last updated April 2026</span>
+        <span style="margin-top:20px;">Built with care.<br/>Hosted on GitHub Pages.</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
+// Projects data
+const PROJECTS = [
+  {
+    idx: "01",
+    date: "March 2026",
+    title: "Nemotron-Cascade 2",
+    venue: "Technical Report",
+    abstract: "We scale Cascade RL and multi-domain on-policy distillation to train Nemotron-Cascade-2-30B-A3B — achieving gold-medal-level results on IMO, IOI, and ICPC World Finals, along with strong performance on ArenaHard and instruction following.",
+    figCaption: "Fig. 01 · benchmark comparison",
+    figNum: "0130-A3B",
+    image: "static/nemotron-cascade-2-benchmarks.png",
+    refs: [
+      { label: "Model", href: "https://huggingface.co/nvidia/Nemotron-Cascade-2-30B-A3B" },
+      { label: "Data", href: "https://huggingface.co/datasets/nvidia/Nemotron-Cascade-2-SFT-Data" },
+      { label: "Collection", href: "https://huggingface.co/collections/nvidia/nemotron-cascade-2" },
+      { label: "Paper ↗", href: "https://arxiv.org/abs/2603.19220" }
+    ]
+  },
+  {
+    idx: "02",
+    date: "December 2025",
+    title: "Nemotron-Cascade",
+    venue: "Technical Report · 14B Thinking",
+    abstract: "We scale Cascade RL to train general-purpose reasoning LLMs spanning RLHF, instruction following, math, code, and SWE. Our 14B Thinking model achieves SOTA on LiveCodeBench — outperforming Gemini-2.5-Pro, o4-mini, Qwen3-235B, DeepSeek-R1-671B — and reaches silver-medal performance at IOI 2025.",
+    figCaption: "Fig. 02 · Cascade RL overview",
+    figNum: "14B-THINK",
+    image: "static/cascade-rl.png",
+    refs: [
+      { label: "Models", href: "https://huggingface.co/collections/nvidia/nemotron-cascade" },
+      { label: "Training Data", href: "https://huggingface.co/collections/nvidia/nemotron-cascade" },
+      { label: "Paper ↗", href: "https://arxiv.org/abs/2512.13607" }
+    ]
+  },
+  {
+    idx: "03",
+    date: "June 2025",
+    title: "AceReason-Nemotron 1.1",
+    venue: "ICLR 2026",
+    abstract: "We further scaled SFT and studied its interplay with RL, releasing the SOTA 7B model, AceReason-Nemotron-1.1-7B.",
+    figCaption: "Fig. 03 · SFT × RL scaling",
+    figNum: "7B-1.1",
+    image: "static/acereason1.1.png",
+    refs: [
+      { label: "Models", href: "https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" },
+      { label: "Training Data", href: "https://huggingface.co/datasets/nvidia/AceReason-1.1-SFT" },
+      { label: "ICLR'26 ↗", href: "https://arxiv.org/abs/2506.13284" }
+    ]
+  },
+  {
+    idx: "04",
+    date: "May 2025",
+    title: "AceReason-Nemotron",
+    venue: "NeurIPS 2025",
+    abstract: "We scaled the previous work to both math and code domains, releasing the SOTA medium-sized model, AceReason-Nemotron-14B.",
+    figCaption: "Fig. 04 · math + code RL",
+    figNum: "14B-ACE",
+    image: "static/acereason.png",
+    refs: [
+      { label: "Models", href: "https://huggingface.co/collections/nvidia/acereason-682f4e1261dc22f697fd1485" },
+      { label: "Training Data", href: "https://huggingface.co/datasets/nvidia/AceReason-Math" },
+      { label: "NeurIPS'25 ↗", href: "https://arxiv.org/abs/2505.16400" }
+    ]
+  },
+  {
+    idx: "05",
+    date: "April 2025",
+    title: "AceMath-RL-Nemotron",
+    venue: "Research Blog",
+    abstract: "Our pilot study on scaling RL for competitive math reasoning LLMs — released as AceMath-RL-Nemotron-7B.",
+    figCaption: "Fig. 05 · RL on competition math",
+    figNum: "7B-RL",
+    image: "static/acemath-rl.png",
+    refs: [
+      { label: "Model", href: "https://huggingface.co/nvidia/AceMath-RL-Nemotron-7B" },
+      { label: "Research Blog ↗", href: "https://research.nvidia.com/labs/adlr/acemath_rl/" }
+    ]
+  },
+  {
+    idx: "06",
+    date: "December 2024",
+    title: "AceMath",
+    venue: "ACL 2025 Findings",
+    abstract: "Math reasoning and reward models — AceMath-1.5B / 7B / 72B, plus AceMath-RM-7B / 72B, which surpassed GPT-4o and Qwen2.5-Math at the time.",
+    figCaption: "Fig. 06 · AceMath family",
+    figNum: "1.5-72B",
+    image: "static/acemath-pic.png",
+    refs: [
+      { label: "Models & Data", href: "https://huggingface.co/collections/nvidia/acemath-678917d12f09885479d549fe" },
+      { label: "ACL'25 Findings ↗", href: "https://arxiv.org/abs/2412.15084" }
+    ]
+  }
+];
+
+function renderProjects() {
+  const container = document.getElementById('projects-list');
+  container.innerHTML = PROJECTS.map(p => `
+    <article class="project reveal">
+      <div class="idx">
+        ${p.idx}
+        <span class="date">${p.date}</span>
+      </div>
+      <div class="project-main">
+        <h3>${p.title}</h3>
+        <div class="venue">${p.venue}</div>
+        <p class="abstract">${p.abstract}</p>
+        <div class="refs">
+          ${p.refs.map(r => `<a href="${r.href}">${r.label}</a>`).join('')}
+        </div>
+      </div>
+      <div class="project-figure">
+        ${p.image ? `<img src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.parentElement.classList.add('no-img')" style="max-width:100%;max-height:100%;object-fit:contain;"/>` : `<svg viewBox="0 0 240 160" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="opacity:.55;"><defs><pattern id="stripes-${p.idx}" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="1" style="color:var(--ink-4);opacity:.5;"/></pattern></defs><rect width="240" height="160" fill="url(#stripes-${p.idx})"/></svg>`}
+      </div>
+    </article>
+  `).join('');
+}
+renderProjects();
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Smooth anchor scrolling
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id.length > 1 && document.querySelector(id)) {
+      e.preventDefault();
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ============ Tweaks ============
+let state = { ...TWEAK_DEFAULTS };
+
+function applyState() {
+  document.body.setAttribute('data-variant', state.variant);
+  document.documentElement.style.setProperty('--accent', state.accent);
+  // update toggle UI
+  document.querySelectorAll('.variant-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.variant === state.variant);
+  });
+  document.querySelectorAll('.accent-swatches button').forEach(b => {
+    b.classList.toggle('active', b.dataset.accent === state.accent);
+  });
+}
+applyState();
+
+function persist(edits) {
+  state = { ...state, ...edits };
+  applyState();
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+}
+
+// variant + accent buttons
+document.querySelectorAll('.variant-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => persist({ variant: btn.dataset.variant }));
+});
+document.querySelectorAll('.accent-swatches button').forEach(btn => {
+  btn.addEventListener('click', () => persist({ accent: btn.dataset.accent }));
+});
+</script>
 </body>
 </html>
