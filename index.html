@@ -146,17 +146,28 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     align-items: end;
     border-bottom: 1px solid var(--rule);
   }
-  .hero-left { display: flex; align-items: flex-end; gap: 36px; min-width: 0; }
-  .hero-title { flex: 1; min-width: 0; }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    min-width: 0;
+  }
+  .hero-heading {
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    min-width: 0;
+    width: 100%;
+  }
   .hero-photo {
     flex-shrink: 0;
-    width: 180px; height: 220px;
+    width: 170px; height: 210px;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid var(--rule);
     background: var(--paper-2);
     box-shadow: 0 12px 32px -14px rgba(60,40,20,0.25);
-    margin-bottom: 12px;
   }
   .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero-meta {
@@ -172,7 +183,9 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   .hero-meta .dash { color: var(--ink-4); }
 
   h1.hero-name {
-    margin: 0 0 28px;
+    margin: 0;
+    flex: 1;
+    min-width: 0;
     font-family: var(--serif);
     font-weight: 400;
     font-size: clamp(64px, 9vw, 136px);
@@ -190,7 +203,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     line-height: 1.35;
     color: var(--ink-2);
     max-width: 640px;
-    margin: 0 0 32px;
+    margin: 0;
     font-weight: 400;
     letter-spacing: -0.01em;
   }
@@ -654,7 +667,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     .topnav-inner { padding: 14px 24px; }
     .topnav nav { gap: 16px; }
     .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 40px; }
-    .hero-left { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .hero-heading { flex-direction: column; align-items: flex-start; gap: 24px; }
     .hero-photo { width: 140px; height: 170px; }
     .section-head { grid-template-columns: 1fr; gap: 20px; }
     .past { grid-template-columns: 1fr; }
@@ -683,27 +696,26 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     <!-- HERO -->
     <section class="hero" id="about">
       <div class="hero-left">
-        <div class="hero-photo">
-          <img src="static/yang.jpg" alt="Yang Chen" onerror="this.onerror=null;this.src='static/yang.png'"/>
+        <div class="hero-heading">
+          <div class="hero-photo">
+            <img src="static/yang.jpg" alt="Yang Chen" onerror="this.onerror=null;this.src='static/yang.png'"/>
+          </div>
+          <h1 class="hero-name">Yang <em>Chen</em></h1>
         </div>
-        <div class="hero-title">
-        <h1 class="hero-name">Yang <em>Chen</em></h1>
         <p class="hero-lede">
-          Research Scientist at NVIDIA (ADLR), scaling reinforcement learning for reasoning LLMs.
+          Research Scientist at NVIDIA (ADLR).
         </p>
-        </div>
       </div>
       <div class="hero-right reveal">
         <div class="sec-label" style="margin-bottom: 18px;">Currently</div>
         <div class="hero-bio">
-          I work on <strong>Cascade RL</strong> and multi-domain distillation for frontier open models —
-          math, code, and agents. Previously Ph.D. at <strong>Georgia Tech</strong> (2024), with research on
-          multimodal and multilingual language models.
+          I work on LLM post-training building towards self-improving AI.
+          Previously Ph.D. at <strong>Georgia Tech</strong> (2024), with research on multimodal and
+          multilingual language models.
         </div>
         <div class="hero-links">
           <a href="https://scholar.google.com/citations?user=o-oBMWEAAAAJ&hl=en"><span class="label"><span class="num">01</span>Google Scholar</span><span class="arrow">→</span></a>
           <a href="https://drive.google.com/file/d/17wRWA4Nspj_RcVaLLZCae_n7pdHlNoKv/view?usp=sharing"><span class="label"><span class="num">02</span>Curriculum Vitae</span><span class="arrow">→</span></a>
-          <a href="/cdn-cgi/l/email-protection#2f564e4c474a416f4159464b464e014c4042"><span class="label"><span class="num">03</span><span class="__cf_email__" data-cfemail="c8b1a9aba0ada688a6bea1aca1a9e6aba7a5">[email&#160;protected]</span></span><span class="arrow">→</span></a>
         </div>
       </div>
     </section>
@@ -795,7 +807,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER
     <section class="footer" id="contact">
       <div>
         <div class="sec-label">§ 03 — Contact</div>
@@ -810,7 +822,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         <span>Last updated April 2026</span>
         <span style="margin-top:20px;">Built with care.<br/>Hosted on GitHub Pages.</span>
       </div>
-    </section>
+    </section> -->
 
   </main>
 </div>
